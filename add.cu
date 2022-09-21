@@ -19,12 +19,31 @@ __global__ void vectorAdd(const int *__restrict a, const int *__restrict b,
   }
 }
 
+__global__ void vectorMultiply(const int *__restrict a, const int *__restrict b,
+                          int *__restrict c, int N) {
+  // Calculate global thread ID
+  int tid = (blockIdx.x * blockDim.x) + threadIdx.x;
+
+  // Boundary check
+  if (tid < N) {
+    c[tid] = a[tid] * b[tid];
+  }
+}
+
 // Check vector add result
 void verify_result(std::vector<int> &a, std::vector<int> &b,
                    std::vector<int> &c) {
   for (int i = 0; i < a.size(); i++) {
     assert(c[i] == a[i] + b[i]);
   }
+}
+
+void cuda_vector_add(vector<int> &d_a, vector<int> &d_b, vector<int> &d_c, int N, int NUM_BLOCKS, int NUM_THREADS) {
+    vectorAdd<<<NUM_BLOCKS, NUM_THREADS>>>(d_a, d_b, d_c, N);
+}
+
+void cuda_vector_multiply(vector<int> &d_a, vector<int> &d_b, vector<int> &d_c, int N, int NUM_BLOCKS, int NUM_THREADS) {
+    vectorMultiply<<<NUM_BLOCKS, NUM_THREADS>>>(d_a, d_b, d_c, N);
 }
 
 int main() {

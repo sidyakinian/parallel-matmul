@@ -1,9 +1,14 @@
+#include <functional>
+#include <chrono>
+#include <iostream>
+
 #ifndef _PROFILER_H_
 #define _PROFILER_H_
 
+// Class for timing functions
+
 template <class> struct ExeTime;
 
-// Execution time decorator
 template <typename... Args>
 struct ExeTime<void(Args ...)> {
 public:
