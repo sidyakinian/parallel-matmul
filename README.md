@@ -14,7 +14,7 @@ The purpose of this repo is to compare their implementation and performance.
 
 ## Performance comparison
 
-On input size 1024, the algorithms take the following time to execute (in seconds):
+On input size 1024, the algorithms take the following time to execute in seconds (as measured on AWS EC2 g4dn instance):
 
 ![matmul_speeds](https://user-images.githubusercontent.com/34050187/191627038-b644dc79-6822-490a-afcd-921c33dbd9e9.png)
 
